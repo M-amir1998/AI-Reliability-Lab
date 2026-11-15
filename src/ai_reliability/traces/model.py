@@ -64,7 +64,13 @@ def to_record(raw: _RawTrace, privacy: TracePrivacy, redactor: Redactor) -> Trac
         input_tokens=raw.input_tokens,
         output_tokens=raw.output_tokens,
         tool_calls=tuple(raw.tool_calls),
-        error=apply_privacy(raw.error, TracePrivacy.REDACTED_TEXT, redactor) if raw.error else None,
+        error=apply_privacy(
+            raw.error,
+            privacy if privacy is not TracePrivacy.FULL_TEXT else TracePrivacy.REDACTED_TEXT,
+            redactor,
+        )
+        if raw.error
+        else None,
         metadata={k: v for k, v in raw.metadata.items() if not redactor.findings(f"{k}={v}")},
         privacy=privacy,
     )

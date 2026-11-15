@@ -69,13 +69,17 @@ class IncidentStore:
         raise UnknownComponent(f"incident {incident_id!r} not found under {self.root}")
 
     def sanitize(self, incident_id: str, *, extra_literals: tuple[str, ...] = ()) -> Incident:
+        sanitized_path = self.sanitized_dir / f"{incident_id}.yaml"
+        if sanitized_path.exists():
+            return self._load_incident(sanitized_path)
+        # A raw file is never trusted, even if it claims to be sanitized already.
         incident = self.load(incident_id)
-        if not incident.sanitization.sanitized:
-            incident = sanitize_incident(incident, extra_literals=extra_literals)
-            self.sanitized_dir.mkdir(parents=True, exist_ok=True)
-            (self.sanitized_dir / f"{incident_id}.yaml").write_text(
-                _dump(incident), encoding="utf-8"
-            )
+        incident = incident.model_copy(
+            update={"sanitization": incident.sanitization.model_copy(update={"sanitized": False})}
+        )
+        incident = sanitize_incident(incident, extra_literals=extra_literals)
+        self.sanitized_dir.mkdir(parents=True, exist_ok=True)
+        sanitized_path.write_text(_dump(incident), encoding="utf-8")
         return incident
 
     def convert(self, incident_id: str) -> tuple[TestCase, Path]:

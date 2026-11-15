@@ -21,7 +21,7 @@ from ai_reliability.domain.content import (
 from ai_reliability.domain.enums import Severity, TestSource, TestStatus, ToolDecision
 from ai_reliability.errors import InvalidTestCase
 
-_ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:\-]{0,127}$")
+_ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:~\-]{0,159}$")
 
 
 class TestInput(DomainModel):

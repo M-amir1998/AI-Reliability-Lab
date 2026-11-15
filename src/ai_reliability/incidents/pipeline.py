@@ -62,6 +62,8 @@ def _all_text(incident: Incident) -> Iterable[str]:
     yield from (o.output for o in i.tool_outputs)
     yield from i.variables.values()
     yield incident.observed.response_text
+    if incident.suspected_root_cause:
+        yield incident.suspected_root_cause
     if incident.observed.error:
         yield incident.observed.error
     if incident.expected and incident.expected.reference_text:
@@ -99,6 +101,9 @@ def sanitize_incident(
         update={
             "description": r(incident.description),
             "expected_description": r(incident.expected_description),
+            "suspected_root_cause": (
+                r(incident.suspected_root_cause) if incident.suspected_root_cause else None
+            ),
             "input": _redact_input(incident.input, red, counts),
             "observed": ObservedBehavior(
                 response_text=r(incident.observed.response_text),

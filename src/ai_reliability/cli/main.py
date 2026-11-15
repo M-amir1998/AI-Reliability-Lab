@@ -633,7 +633,7 @@ def incidents_activate(test_id: str, root: RootOpt = Path()) -> None:
     except ReliabilityError as exc:
         raise _fail(str(exc)) from exc
     console.print(
-        f"{test.test_id}: {test.metadata.status.value} (runs in release gates via suite incident_regressions)"
+        f"{test.test_id}: {test.metadata.status.value} (gated via suites incident_regressions and release_full)"
     )
 
 

@@ -1,5 +1,8 @@
 # SECOND REAL EXPERIMENT (pending): prompt v1 (baseline) vs prompt v2 (candidate).
 # Copy configs/systems/openai-compatible-example.yaml, set prompt version "2", point `system` at it.
+# Scope: the versioned prompt is sent as the system prompt only for tests that do not bring their
+# own (core_quality, structured_output, rag_grounding). Red-team tests define their own protected
+# context, so safety results measure the model under that context, not under prompt v2.
 system: configs/systems/openai-compatible-example.yaml
 suite: release_regression
 repetitions: 3

@@ -110,9 +110,11 @@ class TestSuiteRegistry:
         self.register(
             "release_full",
             lambda: self._compose(
-                "release_full", ("release_regression", "robustness"), tier="release"
+                "release_full",
+                ("release_regression", "robustness", "incident_regressions"),
+                tier="release",
             ),
-            "Everything: release regression + robustness. Intended for manual / real-endpoint runs.",
+            "Everything: release regression + robustness + ACTIVE incident tests (manual/real runs).",
         )
 
     def register(self, suite_id: str, factory: SuiteFactory, description: str = "") -> None:
@@ -132,6 +134,8 @@ class TestSuiteRegistry:
         tests: dict[str, TestCase] = {}
         versions = []
         for part in parts:
+            if part == "incident_regressions" and part not in self._factories:
+                continue  # optional: only present when a workspace registers incident tests
             suite = self.get(part)
             versions.append(f"{part}@{suite.version}")
             for test in suite:

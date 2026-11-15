@@ -18,8 +18,8 @@ _RETRYABLE_CODES = frozenset(
 class RetryPolicy:
     """Retries *transport* failures only.
 
-    Retried: network errors, rate limiting, transient HTTP (502/503/504) and
-    temporary timeouts — i.e. responses whose adapter marked them ``retryable``.
+    Retried: network errors, rate limiting (429), transient HTTP (408/425/502/503/504)
+    and temporary timeouts — i.e. responses whose adapter marked them ``retryable``.
     Never retried: wrong answers, policy violations, invalid responses — those
     are evaluation outcomes, and retrying them would hide real failures.
     """

@@ -17,7 +17,7 @@ from ai_reliability.domain.enums import ErrorCode, SystemKind
 
 
 class TokenUsage(DomainModel):
-    """Token counts as reported by the system. Never estimated silently."""
+    """Token counts as reported by the system (mock systems report synthetic counts)."""
 
     input_tokens: int = Field(default=0, ge=0)
     output_tokens: int = Field(default=0, ge=0)

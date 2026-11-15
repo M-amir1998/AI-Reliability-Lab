@@ -31,8 +31,7 @@ CREATE TABLE IF NOT EXISTS baselines (
     name TEXT NOT NULL,
     run_id TEXT NOT NULL REFERENCES runs(run_id),
     declared_at TEXT NOT NULL,
-    note TEXT,
-    UNIQUE(name, run_id)
+    note TEXT
 );
 """
 
@@ -117,7 +116,7 @@ class RunIndex:
         )
         with self._connect() as conn:
             conn.execute(
-                "INSERT OR IGNORE INTO baselines (name, run_id, declared_at, note) VALUES (?, ?, ?, ?)",
+                "INSERT INTO baselines (name, run_id, declared_at, note) VALUES (?, ?, ?, ?)",
                 (record.name, record.run_id, record.declared_at, record.note),
             )
         return record

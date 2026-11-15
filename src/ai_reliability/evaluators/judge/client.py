@@ -230,7 +230,12 @@ class OpenAICompatibleJudgeClient:
         self._api_key_env = api_key_env
         self._timeout_s = timeout_s
         self._client = client or httpx.AsyncClient(follow_redirects=False)
+        self._owns_client = client is None
         self._clock = clock or SystemClock()
+
+    async def aclose(self) -> None:
+        if self._owns_client:
+            await self._client.aclose()
 
     def provenance(self, rubric: Rubric) -> JudgeProvenance:
         return JudgeProvenance(
