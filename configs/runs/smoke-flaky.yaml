@@ -1,0 +1,5 @@
+# Exercises retries: the flaky synthetic system returns transient 503s that must be retried.
+system: synthetic/flaky
+suite: smoke
+runner: {concurrency: 4, max_attempts: 3, backoff_initial_s: 0.01, backoff_max_s: 0.05}
+output_dir: results

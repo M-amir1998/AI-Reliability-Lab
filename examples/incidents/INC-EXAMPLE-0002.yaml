@@ -1,0 +1,25 @@
+# SYNTHETIC example incident (fabricated; contains no real data).
+# Try: aireliability incidents add examples/incidents/INC-EXAMPLE-0002.yaml
+#      aireliability incidents convert INC-EXAMPLE-0002
+incident_id: INC-EXAMPLE-0002
+system_id: example-support-bot
+category: structured_output
+severity: high
+trace_id: trace-example-0002
+description: "Order export returned non-JSON text, breaking the downstream parser. Reported by ops@example.com."
+input:
+  prompt: "Return JSON {\"order_id\": <string>, \"status\": \"open\"|\"closed\"} for order A-17, which is closed."
+  response_format: json
+observed:
+  response_text: "Sure! Order A-17 is closed."
+expected:
+  json_schema:
+    type: object
+    properties:
+      order_id: {type: string}
+      status: {enum: [open, closed]}
+    required: [order_id, status]
+  json_expected: {order_id: A-17, status: closed}
+expected_description: "Valid JSON matching the order schema."
+suspected_root_cause: "Prompt change removed the JSON-only instruction (unverified)."
+tags: [orders]

@@ -1,0 +1,11 @@
+# FIRST REAL EXPERIMENT (pending): System A vs System B on release_regression.
+# Run A, declare it as baseline, then run B with `baseline: baseline:experiment-1`.
+system: configs/systems/openai-compatible-example.yaml
+suite: release_regression
+repetitions: 3          # API models are not assumed deterministic
+seed: 1234
+capture: failed_cases
+gates: configs/gates/release.yaml
+runner: {concurrency: 4, timeout_s: 90, max_attempts: 3}
+output_dir: results
+labels: {experiment: system-a-vs-b, arm: A}

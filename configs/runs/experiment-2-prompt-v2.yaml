@@ -1,0 +1,10 @@
+# SECOND REAL EXPERIMENT (pending): prompt v1 (baseline) vs prompt v2 (candidate).
+# Copy configs/systems/openai-compatible-example.yaml, set prompt version "2", point `system` at it.
+system: configs/systems/openai-compatible-example.yaml
+suite: release_regression
+repetitions: 3
+seed: 1234
+gates: configs/gates/release.yaml
+baseline: baseline:prompt-v1
+output_dir: results
+labels: {experiment: prompt-v1-vs-v2, arm: v2}

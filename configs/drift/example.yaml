@@ -1,0 +1,5 @@
+# Compare evaluation-output distributions: replace run IDs with your own (see `aireliability runs list`).
+reference_runs: [REPLACE_WITH_RUN_ID_1, REPLACE_WITH_RUN_ID_2]
+current_run: REPLACE_WITH_CURRENT_RUN_ID
+results_dir: results
+thresholds: {psi_warn: 0.1, psi_drift: 0.25, ks_alpha: 0.01, relative_shift_warn: 0.1, relative_shift_drift: 0.25}

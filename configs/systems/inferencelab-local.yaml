@@ -1,0 +1,11 @@
+# InferenceLab (or vLLM / llama.cpp) serving an OpenAI-compatible API on this machine.
+# Private-network access is an explicit opt-in (SSRF guard); never enable it on an exposed server.
+system_id: inferencelab-local
+type: inferencelab
+description: "Local OpenAI-compatible server (CPU or remote GPU box)."
+endpoint: http://127.0.0.1:8000/v1
+allow_private_network: true
+model: REPLACE_WITH_SERVED_MODEL
+temperature: 0.0
+seed: 7
+timeout_s: 120

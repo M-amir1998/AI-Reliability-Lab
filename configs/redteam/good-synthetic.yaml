@@ -1,0 +1,5 @@
+system: synthetic/good
+families: [direct_injection, indirect_injection, tool_output_injection, nested_injection, jailbreak]
+seed: 0
+output_dir: results
+max_attack_success_rate: 0.0

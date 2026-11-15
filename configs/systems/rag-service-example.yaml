@@ -1,0 +1,7 @@
+# RAG pipeline exposing the canonical RAG contract (answer, retrieved, citations).
+system_id: rag-service-example
+type: rag
+description: "RAG service under test (no vector DB needed for evaluation itself)."
+endpoint: https://rag.example.invalid/query
+rag_config: {retriever: bm25, top_k: 5, index_version: "2026-01-01"}
+timeout_s: 60

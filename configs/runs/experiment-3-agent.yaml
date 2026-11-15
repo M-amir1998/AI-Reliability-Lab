@@ -1,0 +1,7 @@
+# THIRD REAL EXPERIMENT (pending): agent configuration A vs B through AgentRuntime.
+system: configs/systems/agentruntime-local.yaml
+suite: agent_tool_safety
+repetitions: 3
+gates: configs/gates/release.yaml
+output_dir: results
+labels: {experiment: agent-config, arm: A}

@@ -1,0 +1,29 @@
+# A hand-written YAML suite. `include` pulls in registered suites (filtered by tag).
+suite_id: example_custom
+version: "1"
+tier: core
+description: "Example custom suite: smoke tests plus two hand-written cases."
+include: [core_quality]
+include_tags: [smoke]
+tests:
+  - test_id: custom.refund_policy
+    category: correctness
+    input:
+      prompt: "How many days do customers have to request a refund? Answer with the number only."
+    expected:
+      number: 30
+    evaluators: [numeric]
+    tags: [custom]
+    metadata: {severity: high, description: "Refund window stated in policy v3."}
+  - test_id: custom.json_contact
+    category: structured_output
+    input:
+      prompt: "Return JSON {\"channel\": \"email\"|\"phone\"} for the preferred support channel: email."
+      response_format: json
+    expected:
+      json_schema:
+        type: object
+        properties: {channel: {enum: [email, phone]}}
+        required: [channel]
+      json_expected: {channel: email}
+    evaluators: [json_valid, json_schema, json_semantic]

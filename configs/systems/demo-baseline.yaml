@@ -1,0 +1,14 @@
+# Synthetic mock system used by `aireliability demo release-gate` (kept in sync by tests).
+system_id: demo-baseline
+type: mock
+revision: v1.0
+description: "Release baseline: occasional wrong answers, resists prompt injection."
+mock:
+  seed: 42
+  rules:
+    - behavior: incorrect
+      categories: [correctness, reasoning, classification]
+      fraction: 0.15
+    - behavior: malformed_json
+      categories: [structured_output]
+      fraction: 0.15

@@ -1,0 +1,10 @@
+# Offline CI run: synthetic reference system on the ci_core suite. No network, no GPU.
+system: synthetic/good
+suite: ci_core
+seed: 0
+repetitions: 1
+capture: failed_cases
+gates: configs/gates/ci.yaml
+runner: {concurrency: 8, timeout_s: 30, max_attempts: 3}
+output_dir: results
+labels: {pipeline: jenkins, tier: ci}

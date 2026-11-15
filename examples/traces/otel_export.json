@@ -1,0 +1,9 @@
+{"resourceSpans": [{"scopeSpans": [{"spans": [
+  {"traceId": "a1", "spanId": "s1", "name": "chat gpt-x", "startTimeUnixNano": "1000000000", "endTimeUnixNano": "1850000000",
+   "attributes": [{"key": "gen_ai.operation.name", "value": {"stringValue": "chat"}}, {"key": "gen_ai.request.model", "value": {"stringValue": "model-x"}}]},
+  {"traceId": "a1", "spanId": "s2", "name": "execute_tool search_orders", "startTimeUnixNano": "1900000000", "endTimeUnixNano": "2050000000",
+   "attributes": [{"key": "gen_ai.operation.name", "value": {"stringValue": "execute_tool"}}, {"key": "tool.name", "value": {"stringValue": "search_orders"}}]},
+  {"traceId": "a2", "spanId": "s3", "name": "retrieval bm25", "startTimeUnixNano": "1000000000", "endTimeUnixNano": "1120000000", "attributes": []},
+  {"traceId": "a2", "spanId": "s4", "name": "chat gpt-x", "startTimeUnixNano": "1200000000", "endTimeUnixNano": "4200000000",
+   "status": {"code": 2}, "attributes": [{"key": "gen_ai.operation.name", "value": {"stringValue": "chat"}}, {"key": "gen_ai.prompt", "value": {"stringValue": "SHOULD NOT BE KEPT"}}]}
+]}]}]}

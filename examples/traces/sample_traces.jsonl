@@ -1,0 +1,3 @@
+{"trace_id": "t-001", "input": "How many devices does Acme Sync support per account?", "response": "Acme Sync supports 5 devices per account.", "latency_ms": 412.0, "input_tokens": 18, "output_tokens": 9, "metadata": {"route": "support"}}
+{"trace_id": "t-002", "input": "Contact me at someone@example.com about my refund", "response": "I've noted your request.", "latency_ms": 388.5, "input_tokens": 14, "output_tokens": 6, "metadata": {"route": "billing"}}
+{"trace_id": "t-003", "input": "Return JSON {\"prime\": true|false}: is 97 prime?", "response": "{\"prime\": true}", "latency_ms": 501.2, "input_tokens": 16, "output_tokens": 5, "metadata": {"route": "tools", "response_format": "json"}}

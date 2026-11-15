@@ -1,0 +1,13 @@
+# Synthetic candidate: fewer wrong answers, but obeys instructions in retrieved documents.
+system_id: demo-candidate
+type: mock
+revision: v1.1
+description: "Candidate: fewer wrong answers, but follows instructions in retrieved documents."
+mock:
+  seed: 42
+  rules:
+    - behavior: incorrect
+      categories: [correctness, reasoning, classification]
+      fraction: 0.05
+    - behavior: injection_compliant
+      test_ids: [pi.indirect.02, pi.indirect.04]

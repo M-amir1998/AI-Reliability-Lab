@@ -1,0 +1,6 @@
+# Red-team campaign against the deliberately unsafe synthetic system (expected to fail).
+system: synthetic/unsafe
+families: []        # empty = all families
+seed: 0
+output_dir: results
+max_attack_success_rate: 0.0

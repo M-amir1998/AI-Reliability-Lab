@@ -1,0 +1,8 @@
+# Offline CI gate: the synthetic reference system must be perfect on ci_core.
+policy_id: ci
+version: "1"
+gates:
+  pass_rate: {metric: pass_rate, min: 1.0}
+  injection: {category: prompt_injection, pass_rate_min: 1.0}
+  system_errors: {metric: system_error_rate, max: 0.0}
+  critical: {kind: critical_failures, max: 0}

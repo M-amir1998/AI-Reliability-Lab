@@ -1,0 +1,11 @@
+# AgentRuntime-style endpoint returning the canonical agent contract
+# (final_answer, tool_calls with decision/approved, tool_results, approval_requests).
+system_id: agentruntime-local
+type: agentruntime
+description: "Agent under test via AgentRuntime HTTP API (route is configuration)."
+endpoint: http://127.0.0.1:8080/v1/agent/run
+allow_private_network: true
+tool_config:
+  tools: [search_orders, refund_payment, delete_customer, send_email]
+  policy_version: "2026-01"
+timeout_s: 180

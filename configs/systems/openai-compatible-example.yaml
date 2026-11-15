@@ -1,0 +1,21 @@
+# Example external system (NOT used in CI). The API key is read from the environment
+# variable named below at run time; never put key values in this file.
+system_id: openai-compatible-example
+type: openai_compatible
+description: "Any OpenAI-compatible chat-completions endpoint."
+endpoint: https://api.openai.com/v1
+model: REPLACE_WITH_MODEL_NAME
+revision: REPLACE_WITH_MODEL_REVISION
+api_key_env: OPENAI_API_KEY
+temperature: 0.0
+seed: 1234
+max_tokens: 512
+timeout_s: 60
+prompt: {prompt_id: support-assistant, version: "1"}
+rate_limit:
+  requests_per_second: 2
+  tokens_per_minute: 60000
+# Pricing is configuration, never hard-coded. Fill in current prices before relying on cost metrics.
+# pricing:
+#   input_per_1k_usd: 0.0
+#   output_per_1k_usd: 0.0
