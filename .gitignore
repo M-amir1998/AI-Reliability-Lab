@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Secrets — never commit
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+credentials*.json
+secrets*.yaml
+
+# Evaluation artifacts (generated, may contain model output)
+results/*
+!results/.gitkeep
+!results/README.md
+reports/*
+!reports/.gitkeep
+!reports/README.md
+
+# Incidents/traces/reviews at the repo root are real data: never committed.
+# (Anchored with a leading slash so src/ai_reliability/incidents etc. are NOT ignored.)
+/incidents/
+/traces/
+/reviews/
+/demo-output/
+/build/
+
+# Large / private data
+*.parquet
+*.duckdb
+*.sqlite
+*.sqlite3
+checkpoints/
+*.safetensors
+*.bin
+*.gguf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

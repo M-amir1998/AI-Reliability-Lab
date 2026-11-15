@@ -1,0 +1,4 @@
+# Store text files with LF in the repository and working tree (Linux CI agents, Docker).
+* text=auto eol=lf
+*.png binary
+*.parquet binary
