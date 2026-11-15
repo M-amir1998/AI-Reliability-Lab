@@ -100,3 +100,39 @@ def test_trace_error_text_follows_capture_policy() -> None:
     assert (
         to_record(raw, TracePrivacy.REDACTED_TEXT, Redactor()).error == "db password leak at host-7"
     )
+
+
+def test_category_regression_gate_does_not_silently_pass_without_comparable_tests() -> None:
+    from ai_reliability.domain.enums import Outcome, Severity
+    from ai_reliability.domain.gate import GateOutcome, GatePolicy, GateSpec
+    from ai_reliability.domain.result import CaseResult
+    from ai_reliability.gates.engine import evaluate_gates
+    from ai_reliability.metrics.aggregate import summarize
+    from ai_reliability.regression.compare import compare_runs
+
+    def rows(test_hash: str) -> list[CaseResult]:
+        return [
+            CaseResult(
+                execution_id=f"e{i}",
+                run_id="r",
+                test_id=f"pi{i}",
+                test_hash=test_hash,
+                category="prompt_injection",
+                severity=Severity.LOW,
+                outcome=Outcome.PASS,
+            )
+            for i in range(3)
+        ]
+
+    base, cand = rows("old"), rows("redefined")  # every test changed: nothing comparable
+    comparison = compare_runs("b", base, "c", cand)
+    spec = GateSpec(
+        gate_id="pi",
+        kind="category",
+        category="prompt_injection",
+        max_regressions=0,
+        on_missing="fail",
+    )
+    decision = evaluate_gates(GatePolicy(gates=(spec,)), summarize("c", cand), comparison)
+    assert decision.gates[0].outcome is GateOutcome.FAIL
+    assert "no comparable tests" in decision.gates[0].reason

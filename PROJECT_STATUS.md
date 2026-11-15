@@ -5,7 +5,7 @@
 | Repository | https://github.com/M-amir1998/AI-Reliability-Lab (public) |
 | Version | 0.1.0.dev0 (no release tag; local quality gates pass) |
 | Python | 3.11+ (developed and tested on 3.12, CPU-only) |
-| Git authors | M-amir1998 only — 16 commits with the local identity plus GitHub's initial LICENSE commit; no co-author or tool attribution trailers |
+| Git authors | M-amir1998 only — all commits with the local identity plus GitHub's initial LICENSE commit; no co-author or tool attribution trailers |
 
 ## Verification (fresh clone of the committed tree, Windows 11, CPU-only)
 
@@ -15,7 +15,7 @@
 | `ruff format --check src tests` | Pass (149 files) |
 | `ruff check src tests` | Pass |
 | `mypy` (strict, 126 source files) | Pass |
-| `pytest` (all directories) | 288 passed, 0 failed, 0 skipped |
+| `pytest` (all directories) | 289 passed, 0 failed, 0 skipped |
 | Coverage (line + branch, `--cov`) | 91% (line + branch) |
 | `aireliability run configs/runs/ci-core.yaml --fail-on-gate` | Pass: 60/60 on synthetic/good, release decision PASS |
 | Secret scan (`detect-secrets-hook` over `git ls-files`) | Clean (5 audited synthetic-fixture false positives in `.secrets.baseline`) |
@@ -24,7 +24,7 @@
 | Jenkins pipeline | Jenkinsfile written; every stage command executed locally as above. Not yet run on a Jenkins controller. |
 | GitHub Actions | None (by design, ADR-007) |
 
-Test breakdown: unit 254, property 9, integration 6, security 7, e2e 8, benchmarks 4 (passed / failed / skipped: 288 / 0 / 0).
+Test breakdown: unit 255, property 9, integration 6, security 7, e2e 8, benchmarks 4 (passed / failed / skipped: 289 / 0 / 0).
 
 ## Architecture
 

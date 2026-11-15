@@ -110,6 +110,10 @@ def _category_gate(
             threshold=f"category {spec.category}",
             reason=f"{spec.category}: " + "; ".join(problems) + note,
         )
+    if needs_baseline and comparison is not None and delta is None:
+        # A baseline exists but no test in this category is comparable (e.g. all redefined):
+        # the regression check never ran, so it must not silently pass.
+        return _missing(spec, f"no comparable tests in category {spec.category!r} vs baseline")
     return GateResult(
         gate_id=spec.gate_id,
         outcome=GateOutcome.PASS,

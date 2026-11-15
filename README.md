@@ -94,7 +94,7 @@ Every system implements one async port, `execute(TestInput) -> SystemResponse`:
 | `AgentSystemAdapter` / `AgentRuntimeSystemAdapter` | Final answer, tool calls with ALLOW/DENY/REQUIRE_APPROVAL decisions, tool results, approval requests |
 | `RAGSystemAdapter` | Answer, retrieved documents, citations |
 
-Endpoints pass an SSRF guard (private, loopback, link-local/metadata, IPv4-mapped and legacy numeric IP forms are rejected unless explicitly opted in). Credentials are referenced by environment-variable *name* only. See [docs/architecture/system-adapters.md](docs/architecture/system-adapters.md).
+Endpoints pass an SSRF guard: literal private, loopback, link-local/metadata, IPv4-mapped and legacy numeric IP forms and known internal hostnames are rejected unless explicitly opted in; checking what a public hostname *resolves* to is opt-in (`EndpointPolicy.resolve_dns`) and does not defend against DNS rebinding. Credentials are referenced by environment-variable *name* only. See [docs/architecture/system-adapters.md](docs/architecture/system-adapters.md).
 
 ## Test suites
 

@@ -90,8 +90,9 @@ Without a baseline, `max_regressions` / `max_pass_rate_drop` cannot be checked: 
 `pass_rate_min` is also set, the gate is evaluated on pass rate alone and its reason notes
 `(regression checks skipped: no baseline)`; otherwise `on_missing` applies. If a category has no
 tests in the run, `on_missing` applies. If a baseline exists but the category has no
-*comparable* tests (e.g. all of its tests are new), the regression checks are skipped without a
-note and only `pass_rate_min` constrains the category.
+*comparable* tests (e.g. all of its tests are new or redefined), the regression check never ran,
+so `on_missing` applies (reason: `not evaluated: no comparable tests ...`) unless `pass_rate_min`
+already failed.
 
 ## Where gates run
 
