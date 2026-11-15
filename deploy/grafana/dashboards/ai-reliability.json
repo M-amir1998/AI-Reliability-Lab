@@ -1,0 +1,20 @@
+{
+  "title": "AI Reliability Lab",
+  "schemaVersion": 39,
+  "time": {"from": "now-6h", "to": "now"},
+  "panels": [
+    {"type": "bargauge", "title": "Pass rate by stored run", "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8},
+     "targets": [{"expr": "aireliability_run_pass_rate", "legendFormat": "{{system}} {{run_id}}"}],
+     "fieldConfig": {"defaults": {"unit": "percentunit", "min": 0, "max": 1}}},
+    {"type": "timeseries", "title": "Evaluation tests/sec (live runs)", "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8},
+     "targets": [{"expr": "rate(aireliability_tests_completed_total[1m])", "legendFormat": "{{system}}"}]},
+    {"type": "timeseries", "title": "Failing executions/sec", "gridPos": {"x": 0, "y": 8, "w": 12, "h": 8},
+     "targets": [{"expr": "rate(aireliability_tests_failed_total[1m])", "legendFormat": "{{system}} {{outcome}}"}]},
+    {"type": "timeseries", "title": "Endpoint errors/sec", "gridPos": {"x": 12, "y": 8, "w": 12, "h": 8},
+     "targets": [{"expr": "rate(aireliability_endpoint_errors_total[5m])", "legendFormat": "{{code}}"}]},
+    {"type": "timeseries", "title": "p95 case latency (ms)", "gridPos": {"x": 0, "y": 16, "w": 12, "h": 8},
+     "targets": [{"expr": "histogram_quantile(0.95, sum by (le) (rate(aireliability_case_latency_ms_bucket[5m])))"}]},
+    {"type": "stat", "title": "Last run duration (s)", "gridPos": {"x": 12, "y": 16, "w": 12, "h": 8},
+     "targets": [{"expr": "aireliability_run_duration_seconds"}]}
+  ]
+}
